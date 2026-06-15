@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Christian Daniel Morán Titla — Científico de datos</title>
+<meta name="description" content="Portafolio y CV de Christian Daniel Morán Titla: biólogo, M.C. en Ecología Integrativa y científico de datos. Bioacústica, machine learning, biogeografía y modelado matemático." />
+
+<!-- Bootstrap 5 + Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Fonts: Jost (sustituto geométrico de Coves) + JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* Coves — fuente solicitada. Coloca los archivos en assets/fonts/ (ver LEER-coves.txt).
+     Mientras tanto se usa Jost como sustituto geométrico muy parecido. */
+  @font-face{font-family:'Coves';src:url('assets/fonts/Coves-Light.woff2') format('woff2'),url('assets/fonts/Coves-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:'Coves';src:url('assets/fonts/Coves-Bold.woff2') format('woff2'),url('assets/fonts/Coves-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+
+  :root{
+    --bg:#0c0d10;
+    --panel:#15171c;
+    --panel-2:#1a1d23;
+    --line:#272b33;
+    --text:#e7e9ec;
+    --muted:#98a0aa;
+    --teal:#1F7A72;
+    --teal-bright:#34c2ae;
+    --red:#e76a55;
+    --display:"Coves","Jost",system-ui,sans-serif;
+    --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+    --head:#ffffff;
+    --sw:264px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);background:var(--bg);color:var(--text);
+    line-height:1.62;font-weight:400;letter-spacing:.005em;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ===================== SIDEBAR ===================== */
+  .sidebar{--bs-offcanvas-width:264px;background:#0e1014;border-color:var(--line)!important}
+  .sidebar .offcanvas-body{display:flex;flex-direction:column;gap:4px;padding:24px 18px}
+  .brand{display:flex;align-items:center;gap:13px;padding:2px 6px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
+  .brand img{width:48px;height:60px;border-radius:11px;object-fit:cover;object-position:center;flex:none}
+  .brand .bn{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.15;color:#fff}
+  .brand .br{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+  .side-nav{display:flex;flex-direction:column;gap:3px;flex:1}
+  .side-nav a{display:flex;align-items:center;gap:13px;padding:10px 12px;border-radius:11px;color:var(--muted);font-size:14px;font-weight:500;transition:.15s}
+  .side-nav a i{font-size:16px;width:20px;text-align:center;flex:none}
+  .side-nav a:hover{background:var(--panel);color:var(--text)}
+  .side-nav a.active{background:rgba(52,194,174,.12);color:var(--teal-bright)}
+
+  .side-social{display:flex;flex-wrap:wrap;gap:9px;padding-top:18px;margin-top:10px;border-top:1px solid var(--line)}
+  .side-social a{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:1px solid var(--line);color:var(--muted);font-size:15px;transition:.15s}
+  .side-social a:hover{color:var(--teal-bright);border-color:var(--teal-bright);transform:translateY(-2px)}
+
+  /* ===================== TOPBAR (móvil) ===================== */
+  .topbar{position:sticky;top:0;z-index:1030;display:flex;align-items:center;justify-content:space-between;
+    padding:11px 16px;background:rgba(12,13,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .topbar .tb-brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px}
+  .topbar .tb-brand img{width:32px;height:40px;border-radius:7px;object-fit:cover;object-position:center}
+  .hamb{background:var(--panel);border:1px solid var(--line);color:var(--text);width:44px;height:44px;border-radius:12px;font-size:21px;display:grid;place-items:center}
+
+  /* ===================== CONTENT (tema claro) ===================== */
+  .content{
+    --bg:#f4f6f5;
+    --panel:#ffffff;
+    --panel-2:#eef2f1;
+    --line:#e4e9e7;
+    --text:#26333c;
+    --muted:#6c767e;
+    --teal-bright:#178a7d;
+    --head:#16222b;
+    min-height:100vh;background:var(--bg);color:var(--text);
+  }
+  .content-pad{max-width:1140px;margin:0 auto;padding:46px 34px 88px;display:flex;flex-direction:column;gap:58px}
+  section{scroll-margin-top:92px}
+
+  @media (min-width:992px){
+    .sidebar{position:fixed!important;top:0;left:0;height:100vh;width:var(--sw);border-right:1px solid var(--line);
+      background:#0e1014!important;visibility:visible!important;transform:none!important;z-index:1031}
+    .content{margin-left:var(--sw)}
+    .topbar{display:none!important}
+  }
+  @media (max-width:991px){
+    .content-pad{padding:30px 18px 72px;gap:46px}
+  }
+
+  /* ===================== HERO ===================== */
+  .hero2{position:relative;padding-top:6px}
+  .hero2 .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;pointer-events:none;z-index:0}
+  .hero2 .blob.b1{width:340px;height:340px;right:-40px;top:-30px;background:radial-gradient(circle,rgba(52,194,174,.10),transparent 70%)}
+  .hero2 .blob.b2{width:260px;height:260px;left:30%;bottom:-60px;background:radial-gradient(circle,rgba(31,122,114,.10),transparent 70%)}
+  .hero2 > .row{position:relative;z-index:1}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal-bright);margin-bottom:18px}
+  .hero-name{font-family:var(--display);font-weight:300;font-size:clamp(40px,6vw,74px);line-height:1.0;letter-spacing:.01em;margin:0}
+  .hero-name .accent{color:var(--teal-bright);font-weight:700}
+  .hero-role{font-size:clamp(17px,2.2vw,21px);margin-top:16px;color:var(--text);font-weight:300}
+  .hero-role b{font-weight:600;color:var(--head);border-bottom:2px solid var(--teal-bright);padding-bottom:1px}
+  .hero-sum{max-width:560px;color:var(--muted);margin:20px 0 0;font-size:19.5px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+  .pill{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:14px;transition:.18s;cursor:pointer;border:1px solid transparent}
+  .pill.solid{background:var(--teal);color:#fff}
+  .pill.solid:hover{background:#16222b;color:#fff;transform:translateY(-2px)}
+  .pill.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+  .pill.ghost:hover{border-color:var(--teal-bright);color:var(--teal-bright);transform:translateY(-2px)}
+  .social{display:flex;gap:12px;margin-top:28px}
+  .social a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);font-size:17px;transition:.18s}
+  .social a:hover{color:var(--teal-bright);border-color:var(--teal-bright);transform:translateY(-2px)}
+
+  .hero-photo{position:relative;max-width:330px;margin-left:auto}
+  .hero-photo img{width:100%;border-radius:24px;object-fit:cover;object-position:center;display:block;
+    border:1px solid var(--line);box-shadow:0 18px 44px rgba(22,34,43,.16)}
+  .hero-photo::after{content:"";position:absolute;inset:-14px;border-radius:30px;
+    background:radial-gradient(circle at 70% 20%,rgba(52,194,174,.18),transparent 60%);z-index:-1}
+  @media (max-width:991px){.hero-photo{margin:0 auto 4px;max-width:280px}}
+
+  /* ===================== CARDS / COMPONENTS (dark) ===================== */
+  .card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:none}
+  .card.pad{padding:24px}
+  .card h3{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 16px}
+
+  .sec-head{display:flex;align-items:center;gap:18px;margin-bottom:24px}
+  .sec-head h2{font-family:var(--display);font-size:clamp(26px,3.4vw,36px);font-weight:300;color:var(--text);letter-spacing:.02em;white-space:nowrap;margin:0}
+  .sec-head::after{content:"";flex:1;height:1px;background:var(--line)}
+  .lead-muted{color:var(--muted);max-width:760px;margin:0 0 22px;font-size:19.5px}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px}
+  .kpi .n{font-family:var(--display);font-weight:300;font-size:38px;color:var(--teal-bright);line-height:1}
+  .kpi .n small{font-size:20px}
+  .kpi .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+
+  /* filter bar */
+  .filterbar{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+  .fbtn{font-family:var(--mono);font-size:12.5px;padding:9px 15px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);background:var(--panel);color:var(--muted);font-weight:500;transition:all .15s}
+  .fbtn:hover{border-color:var(--teal-bright);color:var(--teal-bright)}
+  .fbtn.active{background:var(--teal-bright);border-color:var(--teal-bright);color:#fff}
+
+  /* logo tiles */
+  .logo{width:48px;height:48px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
+  .logo img{width:100%;height:100%;object-fit:contain;padding:6px}
+  .logo.dark{background:#0a0b0d;border-color:var(--line)}
+  .logo.light{background:#fff;border-color:var(--line)}
+  .logo.sm{width:38px;height:38px;border-radius:9px}
+  .logo-stack{display:flex;flex-direction:column;gap:7px;flex:none}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:30px}
+  .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--teal-bright),var(--line))}
+  .job{position:relative;margin-bottom:26px;display:flex;gap:14px;transition:opacity .25s ease}
+  .job:last-child{margin-bottom:0}
+  .job::before{content:"";position:absolute;left:-30px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--teal-bright)}
+  .job.muted::before{border-color:var(--muted)}
+  .job-body{flex:1;min-width:0}
+  .job .when{font-family:var(--mono);font-size:12px;color:var(--teal-bright);font-weight:500;letter-spacing:.02em}
+  .job.muted .when{color:var(--muted)}
+  .job .pos{font-size:17px;font-weight:600;color:var(--head);margin:3px 0 1px}
+  .job .org{font-size:13.5px;color:var(--muted);margin-bottom:9px}
+  .job .org b{color:var(--text);font-weight:600}
+  .job ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin:0;padding:0}
+  .job li{position:relative;padding-left:18px;font-size:18px;color:#c3c9d0}
+  .job li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--red)}
+  .job li b{color:var(--head);font-weight:600}
+
+  .is-hidden{display:none !important}
+
+  /* skills */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .skill{margin-bottom:15px}
+  .skill:last-child{margin-bottom:0}
+  .skill .top{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;margin-bottom:6px}
+  .skill .top b{font-weight:600;color:var(--text)}
+  .skill .top em{font-family:var(--mono);font-size:11.5px;color:var(--muted);font-style:normal}
+  .meter{height:6px;border-radius:99px;background:var(--panel-2);overflow:hidden}
+  .meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--teal-bright));width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+
+  /* taglist */
+  .taglist{display:flex;flex-wrap:wrap;gap:7px}
+  .tag{font-family:var(--mono);font-size:11.5px;padding:5px 10px;border-radius:7px;background:var(--panel-2);color:#c3c9d0;border:1px solid var(--line)}
+  .tag.accent{background:rgba(52,194,174,.12);color:var(--teal-bright);border-color:rgba(52,194,174,.3)}
+
+  /* programming dots */
+  .prog .row{display:flex;align-items:center;gap:14px;padding:11px 0;margin:0;border-bottom:1px dashed var(--line)}
+  .prog .row:last-child{border-bottom:0}
+  .prog .pgroup{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .prog .name{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--text)}
+  .prog .pico{margin-left:auto;flex:none;width:32px;display:inline-flex;align-items:center;justify-content:center;color:var(--teal-bright);font-size:25px}
+  .prog .pico img{width:30px;height:30px;object-fit:contain;display:block}
+  .dots{display:flex;gap:6px}
+  .dots i{width:14px;height:14px;border-radius:50%;background:var(--panel-2);border:1px solid var(--line)}
+  .dots i.on{background:var(--teal-bright);border-color:var(--teal-bright)}
+  .dots i.half{background:linear-gradient(90deg,var(--teal-bright) 50%,var(--panel-2) 50%);border-color:var(--teal-bright)}
+
+  /* languages (about) */
+  .lang{margin-bottom:14px}
+  .lang:last-child{margin-bottom:0}
+  .lang .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+  .lang .top b{font-weight:600;color:var(--text)}
+  .lang .top em{font-family:var(--mono);font-size:12px;color:var(--muted);font-style:normal}
+
+  /* education */
+  .edu{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+  .edu:last-child{border-bottom:0}
+  .edu .yr{font-family:var(--display);font-size:26px;font-weight:300;color:var(--teal-bright);width:64px;flex:none;line-height:1.1}
+  .edu .deg{font-size:16px;font-weight:600;color:var(--head)}
+  .edu .where{font-size:13.5px;color:var(--muted)}
+  .badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:99px;margin-top:7px;margin-right:6px;font-weight:500}
+  .badge.go{background:rgba(52,194,174,.14);color:var(--teal-bright)}
+  .badge.grade{background:rgba(231,106,85,.16);color:#f0a08e}
+
+  /* publications */
+  .pub{padding:15px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:center}
+  .pub:last-child{border-bottom:0}
+  .pub .jlogo{margin-left:auto;flex:none;height:46px;width:auto;max-width:120px;object-fit:contain;border-radius:9px;background:#fff;border:1px solid var(--line);padding:5px}
+  .pub .yr{font-family:var(--mono);font-size:13px;color:var(--teal-bright);font-weight:600;width:46px;flex:none}
+  .pub .t{font-size:14.5px;color:var(--head);font-weight:600;line-height:1.4}
+  .pub .src{font-size:13px;color:var(--muted);margin-top:3px}
+  .pub .src a{color:var(--teal-bright)}
+
+  /* two-up + lists */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .listy{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0;padding:0}
+  .listy li{display:flex;gap:12px;font-size:14px;align-items:flex-start}
+  .listy li .yr{font-family:var(--mono);font-size:12px;color:var(--teal-bright);font-weight:600;flex:none;width:40px;padding-top:1px}
+  .listy li span{color:#c3c9d0}
+
+  /* contact meta */
+  .meta-row{display:flex;gap:13px;align-items:center;font-size:14.5px;padding:11px 0;border-bottom:1px solid var(--line);color:var(--text)}
+  .meta-row:last-child{border-bottom:0}
+  .meta-row i{color:var(--teal-bright);font-size:18px;width:24px;text-align:center;flex:none}
+  .meta-row a:hover{color:var(--teal-bright)}
+
+  /* footer */
+  footer{background:var(--panel-2);border-top:1px solid var(--line);color:var(--muted);padding:30px 0}
+  footer .fwrap{max-width:1140px;margin:0 auto;padding:0 34px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  footer .credit{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;display:flex;align-items:center;gap:10px}
+  footer img{width:30px;height:30px;border-radius:8px;object-fit:cover}
+
+  @media (max-width:991px){ footer .fwrap{padding:0 18px} }
+  @media (max-width:760px){ .kpis{grid-template-columns:1fr 1fr} .grid2,.duo{grid-template-columns:1fr} }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}.meter i{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ===================== TOPBAR (móvil) ===================== -->
+<div class="topbar">
+  <div class="tb-brand"><img src="assets/foto.png" alt="" />Christian Morán</div>
+  <button class="hamb" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-label="Abrir menú">
+    <i class="bi bi-list"></i>
+  </button>
+</div>
+
+<!-- ===================== SIDEBAR ===================== -->
+<div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebar" aria-label="Navegación">
+  <div class="offcanvas-header d-lg-none">
+    <span class="tb-brand" style="font-family:var(--display);font-weight:600">Menú</span>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Cerrar"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="brand">
+      <img src="assets/foto.png" alt="Christian Daniel Morán Titla" />
+      <div>
+        <div class="bn">Christian Morán</div>
+        <div class="br">Científico de datos</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="#home"><i class="bi bi-house"></i>Inicio</a>
+      <a href="#sobre"><i class="bi bi-person"></i>Sobre mí</a>
+      <a href="#experiencia"><i class="bi bi-briefcase"></i>Experiencia</a>
+      <a href="#especializacion"><i class="bi bi-bar-chart"></i>Especialización</a>
+      <a href="#stack"><i class="bi bi-stack"></i>Stack &amp; herramientas</a>
+      <a href="#programacion"><i class="bi bi-code-slash"></i>Programación</a>
+      <a href="#academia"><i class="bi bi-mortarboard"></i>Academia</a>
+      <a href="#publicaciones"><i class="bi bi-journal-text"></i>Publicaciones</a>
+      <a href="#mas"><i class="bi bi-award"></i>Certif. &amp; congresos</a>
+      <a href="#contacto"><i class="bi bi-envelope"></i>Contacto</a>
+    </nav>
+    <div class="side-social">
+      <a href="https://www.linkedin.com/in/christian-daniel-mor%C3%A1n-titla-a99418130/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+      <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+      <a href="https://gitlab.com/" target="_blank" rel="noopener" aria-label="GitLab"><i class="bi bi-git"></i></a>
+      <a href="https://cocuidev.mx" target="_blank" rel="noopener" aria-label="Sitio web"><i class="bi bi-globe2"></i></a>
+      <a href="https://wa.me/522221097767" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="mailto:christianbiotitla@gmail.com" aria-label="Correo"><i class="bi bi-envelope-fill"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONTENT ===================== -->
+<main class="content">
+  <div class="content-pad">
+
+    <!-- HERO -->
+    <section id="home" class="hero2">
+      <span class="blob b1"></span><span class="blob b2"></span>
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-7">
+          <div class="eyebrow">Biólogo · M.C. Ecología Integrativa · Esp. Métodos Estadísticos</div>
+          <h1 class="hero-name">Christian Daniel <span class="accent">Morán Titla</span></h1>
+          <div class="hero-role"><b>Científico de datos</b> &amp; <span style="color:var(--teal-bright);font-weight:600">Biólogo</span></div>
+          <p class="hero-sum">
+            Investigo poblaciones y comunidades biológicas desde la ecología, la biogeografía y la
+            bioacústica, aplicando machine learning, IA, modelado matemático y estadística. Lidero
+            proyectos de analítica avanzada, modelos de ML, desarrollo DevOps y agentes de IA.
+          </p>
+          <div class="cta-row">
+            <a class="pill solid" href="#experiencia"><i class="bi bi-briefcase"></i>Ver mi experiencia</a>
+            <a class="pill ghost" href="#contacto"><i class="bi bi-chat-dots"></i>Contáctame</a>
+          </div>
+          <div class="social">
+            <a href="https://www.linkedin.com/in/christian-daniel-mor%C3%A1n-titla-a99418130/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://gitlab.com/" target="_blank" rel="noopener" aria-label="GitLab"><i class="bi bi-git"></i></a>
+            <a href="https://cocuidev.mx" target="_blank" rel="noopener" aria-label="Sitio web"><i class="bi bi-globe2"></i></a>
+            <a href="https://wa.me/522221097767" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="hero-photo"><img src="assets/foto.png" alt="Christian Daniel Morán Titla" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre">
+      <div class="sec-head">
+        <h2>Sobre mí</h2>
+      </div>
+      <p class="lead-muted">
+        Perfil multidisciplinario que combina ciencias biológicas, métodos cuantitativos y desarrollo
+        de software. Más de una década aplicando estadística e investigación a problemas de ciencias
+        biológicas, sociales, exactas y finanzas corporativas.
+      </p>
+      <div class="kpis">
+        <div class="kpi"><div class="n">+10</div><div class="l">Años en estadística e investigación</div></div>
+        <div class="kpi"><div class="n">5</div><div class="l">Programas académicos · Lic → Doctorado</div></div>
+        <div class="kpi"><div class="n">2</div><div class="l">Publicaciones científicas</div></div>
+        <div class="kpi"><div class="n">8<small>+</small></div><div class="l">Áreas de especialización</div></div>
+      </div>
+      <div class="duo" style="margin-top:20px">
+        <div class="card pad">
+          <h3>Idiomas</h3>
+          <div class="lang"><div class="top"><b>Español</b><em>Nativo</em></div><div class="meter"><i data-w="100"></i></div></div>
+          <div class="lang"><div class="top"><b>Inglés</b><em>B1</em></div><div class="meter"><i data-w="55"></i></div></div>
+        </div>
+        <div class="card pad">
+          <h3>Intereses</h3>
+          <div class="taglist">
+            <span class="tag">Artes marciales</span>
+            <span class="tag">Apreciación musical</span>
+            <span class="tag">Observación de aves</span>
+            <span class="tag">Fotografía científica</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- EXPERIENCIA -->
+    <section id="experiencia">
+      <div class="filterbar" role="group" aria-label="Filtrar experiencia por área">
+        <button class="fbtn active" data-cat="todos">Todos</button>
+        <button class="fbtn" data-cat="investigacion">Investigación</button>
+        <button class="fbtn" data-cat="analitica">Analítica Avanzada</button>
+        <button class="fbtn" data-cat="mlia">ML &amp; IA</button>
+        <button class="fbtn" data-cat="bi">BI</button>
+        <button class="fbtn" data-cat="devops">DevOps</button>
+      </div>
+      <div class="sec-head">
+        <h2>Experiencia</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="job" data-tags="investigacion analitica devops mlia bi">
+          <div class="logo light"><img src="assets/conabio.png" alt="CONABIO" /></div>
+          <div class="job-body">
+            <div class="when">Ene. 2026 — Actual</div>
+            <div class="pos">Consultor de investigación en bioacústica</div>
+            <div class="org"><b>CONABIO</b> · Contrato temporal</div>
+            <ul>
+              <li><b>Plataforma interactiva de paisaje sonoro</b> que permite identificar hallazgos de distintas regiones de México (proyecto CoSMoS).</li>
+              <li><b>Índices de paisaje sonoro</b> como equivalencia de integridad ecosistémica desde la dimensión acústica.</li>
+              <li><b>Storytelling de historias de usuario</b> que cruza la frontera entre lo teórico y lo didáctico para distintos perfiles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job" data-tags="analitica mlia bi devops">
+          <div class="logo light"><img src="assets/banco-base.png" alt="Grupo Financiero Base" /></div>
+          <div class="job-body">
+            <div class="when">Ene. 2025 — Actual</div>
+            <div class="pos">Científico de Datos</div>
+            <div class="org"><b>Grupo Financiero Base</b> · Banco Base</div>
+            <ul>
+              <li><b>Retención y ofertas de spread (IA):</b> red neuronal profunda que predice fuga de clientes FX sobre modelos BTYD; modelación matemática para maximizar el spread sin comprometer la relación contractual.</li>
+              <li><b>BI de fondeo de tesorería:</b> dashboards en Tableau y Power BI de operaciones de divisas con contrapartes.</li>
+              <li><b>ETL de utilidades:</b> vista materializada transaccional; extracción, limpieza, transformación, cruce, validación e ingesta.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job" data-tags="investigacion mlia devops bi">
+          <div class="logo dark"><img src="assets/cocuite-dev.png" alt="Cocui Dev" /></div>
+          <div class="job-body">
+            <div class="when">Ene. 2024 — Actual</div>
+            <div class="pos">Científico de Datos MLOps</div>
+            <div class="org"><b>Cocui Dev</b> · Consultoría independiente</div>
+            <ul>
+              <li><b>DevOps de flujos de desarrollo:</b> implementación (API/preprocesamiento, EDA/MLOps), despliegue (CI-CD) y monitoreo (ETL/BI) en producción.</li>
+              <li><b>App web de IA</b> para identificación de especies de aves por canto.</li>
+              <li><b>App web</b> de atención a cliente y POS de restaurante; <b>agente de IA</b> para clasificación de artículos y metaanálisis automático.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job" data-tags="investigacion analitica">
+          <div class="logo light"><img src="assets/buap.png" alt="BUAP" /></div>
+          <div class="job-body">
+            <div class="when">Mar. 2017 — Actual</div>
+            <div class="pos">Asesor de campo y de investigación</div>
+            <div class="org"><b>Facultad de Ciencias Biológicas</b> · BUAP</div>
+            <ul>
+              <li>Gestión de proyectos de bioacústica <em>in situ</em> (objetivos, hipótesis, preguntas y diseño de muestreo) para Ecología General y Métodos de Investigación.</li>
+              <li>Toma de datos con dispositivos acústicos, preprocesamiento, análisis estadístico e interpretación de resultados.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job muted" data-tags="analitica mlia devops bi">
+          <div class="logo light"><img src="assets/findep.png" alt="Financiera Independencia" /></div>
+          <div class="job-body">
+            <div class="when">Abr. 2024 — Ene. 2025</div>
+            <div class="pos">Gerente de IA y crimen financiero</div>
+            <div class="org"><b>Grupo FINDEP</b> · Financiera Independencia</div>
+            <ul>
+              <li>DevOps y gestión de modelos de IA: blindaje financiero con modelos de identidad, contactabilidad y fraude para mejorar ventas y cobro de créditos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job muted" data-tags="analitica bi">
+          <div class="logo light"><img src="assets/azteca.png" alt="Banco Azteca" /></div>
+          <div class="job-body">
+            <div class="when">Ago. 2022 — Abr. 2024</div>
+            <div class="pos">Consultor de conocimiento de mercado · BI</div>
+            <div class="org"><b>Grupo Salinas</b> · Banco Azteca</div>
+            <ul>
+              <li>Pronósticos de fondeo de remesas, análisis de KPI's, segmentación de clientes y modelos BTYD.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="job muted" data-tags="investigacion analitica mlia bi">
+          <div class="logo-stack">
+            <div class="logo sm light"><img src="assets/inegi.jpeg" alt="INEGI" /></div>
+            <div class="logo sm dark"><img src="assets/dai.jpg" alt="DAI" /></div>
+            <div class="logo sm dark"><img src="assets/base.jpg" alt="Latreach / Base 10" /></div>
+          </div>
+          <div class="job-body">
+            <div class="when">2017 — 2022</div>
+            <div class="pos">Trayectoria temprana en datos &amp; estadística</div>
+            <div class="org">INEGI · DAI · Latreach / Base 10</div>
+            <ul>
+              <li><b>INEGI</b> (2022): Enlace de vinculación estadística "C" — geoestadística, ML y análisis de texto.</li>
+              <li><b>DAI</b> (2019): analista estadístico — docencia, investigación y consultoría.</li>
+              <li><b>Latreach</b> (2017): data scientist — inteligencia de negocios y data marketing.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ESPECIALIZACIÓN -->
+    <section id="especializacion" class="cv-section">
+      <div class="sec-head">
+        <h2>Especialización</h2>
+      </div>
+      <div class="card pad">
+        <div class="grid2">
+          <div>
+            <div class="skill" data-tags="analitica investigacion"><div class="top"><b>Estadística avanzada</b><em>10 años</em></div><div class="meter"><i data-w="98"></i></div></div>
+            <div class="skill" data-tags="investigacion"><div class="top"><b>Métodos de investigación</b><em>10 años</em></div><div class="meter"><i data-w="96"></i></div></div>
+            <div class="skill" data-tags="investigacion"><div class="top"><b>Bioacústica · Biogeografía · Ecología</b><em>10 años</em></div><div class="meter"><i data-w="95"></i></div></div>
+            <div class="skill" data-tags="mlia analitica"><div class="top"><b>Machine Learning</b><em>8 años</em></div><div class="meter"><i data-w="88"></i></div></div>
+          </div>
+          <div>
+            <div class="skill" data-tags="analitica investigacion"><div class="top"><b>Sistemas de información geográfica</b><em>6 años</em></div><div class="meter"><i data-w="78"></i></div></div>
+            <div class="skill" data-tags="mlia"><div class="top"><b>Inteligencia artificial</b><em>4 años</em></div><div class="meter"><i data-w="68"></i></div></div>
+            <div class="skill" data-tags="bi analitica"><div class="top"><b>Inteligencia de negocios</b><em>4 años</em></div><div class="meter"><i data-w="66"></i></div></div>
+            <div class="skill" data-tags="devops"><div class="top"><b>DevOps</b><em>2 años</em></div><div class="meter"><i data-w="52"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="cv-section">
+      <div class="sec-head">
+        <h2>Stack &amp; herramientas</h2>
+      </div>
+      <div class="duo">
+        <div class="card pad" data-tags="mlia analitica">
+          <h3>Técnicas ML &amp; IA</h3>
+          <div class="taglist">
+            <span class="tag accent">Supervisado</span><span class="tag accent">No supervisado</span>
+            <span class="tag accent">Semisupervisado</span><span class="tag accent">Refuerzo</span>
+            <span class="tag">scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">Keras</span>
+            <span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">Ollama</span>
+            <span class="tag">Series de tiempo</span><span class="tag">Reconocimiento de imágenes</span>
+          </div>
+        </div>
+        <div class="card pad" data-tags="devops">
+          <h3>DevOps &amp; nube</h3>
+          <div class="taglist">
+            <span class="tag">FastAPI</span><span class="tag">Flask</span><span class="tag">Shiny</span>
+            <span class="tag">React</span><span class="tag">Docker</span><span class="tag">MLflow</span>
+            <span class="tag">H2O</span><span class="tag">Pipelines · CI/CD</span>
+            <span class="tag accent">AWS</span><span class="tag accent">Google Cloud</span>
+            <span class="tag accent">Firebase</span><span class="tag accent">BigQuery</span>
+            <span class="tag">Netlify</span><span class="tag">GitHub / GitLab</span>
+          </div>
+        </div>
+        <div class="card pad" data-tags="investigacion analitica bi">
+          <h3>Software &amp; SIG</h3>
+          <div class="taglist">
+            <span class="tag">Raven</span><span class="tag">Audacity</span><span class="tag">QGIS</span>
+            <span class="tag">ArcGIS</span><span class="tag">IDRISI</span><span class="tag">Jupyter</span>
+            <span class="tag">RStudio</span><span class="tag">VS Code</span>
+            <span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Looker Studio</span>
+          </div>
+        </div>
+        <div class="card pad" data-tags="investigacion analitica devops bi">
+          <h3>Metodología &amp; datos</h3>
+          <div class="taglist">
+            <span class="tag accent">Método científico</span><span class="tag accent">Scrum</span>
+            <span class="tag">Docencia</span><span class="tag">Investigación</span>
+            <span class="tag">Big Data</span><span class="tag">Procesos ETL</span>
+            <span class="tag">API's</span><span class="tag">Scraping</span>
+            <span class="tag">Linux · Mac · Windows</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAMACIÓN -->
+    <section id="programacion" class="cv-section">
+      <div class="sec-head">
+        <h2>Programación</h2>
+      </div>
+      <div class="duo">
+        <div class="card pad prog cv-section">
+          <h3>Lenguajes</h3>
+          <div class="row" data-tags="analitica bi devops"><div class="pgroup"><span class="name">SQL</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><span class="pico"><img src="assets/sql.webp" alt="SQL"></span></div>
+          <div class="row" data-tags="mlia analitica devops investigacion"><div class="pgroup"><span class="name">Python</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><span class="pico"><img src="assets/python.webp" alt="Python"></span></div>
+          <div class="row" data-tags="analitica investigacion mlia"><div class="pgroup"><span class="name">R</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i></span></div><span class="pico"><img src="assets/r.webp" alt="R"></span></div>
+          <div class="row" data-tags="devops"><div class="pgroup"><span class="name">JavaScript</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><span class="pico"><img src="assets/js.webp" alt="JavaScript"></span></div>
+          <div class="row" data-tags="devops"><div class="pgroup"><span class="name">HTML / CSS</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i></span></div><span class="pico"><img src="assets/css.webp" alt="HTML / CSS"></span></div>
+          <div class="row" data-tags="analitica investigacion"><div class="pgroup"><span class="name">Julia</span><span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div><span class="pico"><img src="assets/julia.webp" alt="Julia"></span></div>
+        </div>
+        <div class="card pad prog cv-section">
+          <h3>Business Intelligence</h3>
+          <div class="row" data-tags="bi"><div class="pgroup"><span class="name">Power BI</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div><span class="pico"><img src="assets/powerbi.webp" alt="Power BI"></span></div>
+          <div class="row" data-tags="bi"><div class="pgroup"><span class="name">Tableau</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><span class="pico"><img src="assets/tableau.webp" alt="Tableau"></span></div>
+          <div class="row" data-tags="bi"><div class="pgroup"><span class="name">Looker Studio</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><span class="pico"><img src="assets/looker.webp" alt="Looker Studio"></span></div>
+        </div>
+        <div class="card pad prog cv-section">
+          <h3>Nube / cómputo</h3>
+          <div class="row" data-tags="devops mlia analitica"><div class="pgroup"><span class="name">Google Cloud</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><span class="pico"><img src="assets/googlecloud.webp" alt="Google Cloud"></span></div>
+          <div class="row" data-tags="devops mlia analitica"><div class="pgroup"><span class="name">AWS · Cloudera</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div><span class="pico"><img src="assets/aws.webp" alt="AWS · Cloudera"></span></div>
+          <div class="row" data-tags="devops analitica investigacion"><div class="pgroup"><span class="name">RStudio Server</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div><span class="pico"><img src="assets/posit.webp" alt="RStudio Server"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMIA -->
+    <section id="academia" class="cv-section">
+      <div class="sec-head">
+        <h2>Academia</h2>
+      </div>
+      <div class="card pad">
+        <div class="edu" data-tags="investigacion analitica mlia">
+          <div class="yr">2026</div>
+          <div><div class="deg">Doctorado en Ciencias Biológicas</div><div class="where">UNAM</div><span class="badge go">En curso</span><span class="badge grade">Promedio 10</span></div>
+          <div class="logo light" style="margin-left:auto"><img src="assets/unam.png" alt="UNAM" /></div>
+        </div>
+        <div class="edu" data-tags="mlia analitica devops bi">
+          <div class="yr">2025</div>
+          <div><div class="deg">Maestría en Ciencia de Datos</div><div class="where">INFOTEC</div><span class="badge go">En curso</span><span class="badge grade">Promedio 9.6</span></div>
+          <div class="logo light" style="margin-left:auto"><img src="assets/infotec_posgrados.png" alt="INFOTEC" /></div>
+        </div>
+        <div class="edu" data-tags="analitica investigacion">
+          <div class="yr">2023</div>
+          <div><div class="deg">Especialidad en Métodos Estadísticos</div><div class="where">CIMAT</div><span class="badge grade">Promedio 10.0</span></div>
+          <div class="logo light" style="margin-left:auto"><img src="assets/cimat.png" alt="CIMAT" /></div>
+        </div>
+        <div class="edu" data-tags="investigacion">
+          <div class="yr">2023</div>
+          <div><div class="deg">Maestría en Ecología Integrativa</div><div class="where">INIRENA · UMSNH</div><span class="badge grade">Promedio 9.83</span></div>
+          <div class="logo light" style="margin-left:auto"><img src="assets/umsnh.webp" alt="INIRENA — UMSNH" /></div>
+        </div>
+        <div class="edu" data-tags="investigacion">
+          <div class="yr">2018</div>
+          <div><div class="deg">Licenciatura en Biología</div><div class="where">BUAP</div><span class="badge grade">Promedio 7.88</span></div>
+          <div class="logo light" style="margin-left:auto"><img src="assets/buap.png" alt="BUAP" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICACIONES -->
+    <section id="publicaciones" class="cv-section">
+      <div class="sec-head">
+        <h2>Publicaciones</h2>
+      </div>
+      <div class="card pad">
+        <div class="pub" data-tags="investigacion analitica">
+          <div class="yr">2025</div>
+          <div>
+            <div class="t">Niche-related processes explain phylogenetic structure of acoustic bird communities in Mexico</div>
+            <div class="src">Morán-Titla CD, García-Chávez J, López-Toledo L, González C. <em>PeerJ</em> 13:e18412 · <a href="https://doi.org/10.7717/peerj.18412" target="_blank" rel="noopener">doi.org/10.7717/peerj.18412</a></div>
+          </div>
+          <img class="jlogo" src="assets/peerj.webp" alt="PeerJ" />
+        </div>
+        <div class="pub" data-tags="investigacion">
+          <div class="yr">2022</div>
+          <div>
+            <div class="t">El mejor lugar para cantar: hipótesis de adaptación acústica en aves</div>
+            <div class="src">Morán Titla CD, González C. <em>Elementos</em> 126 (2022) 81–88.</div>
+          </div>
+          <img class="jlogo" src="assets/elementos.webp" alt="Elementos" />
+        </div>
+      </div>
+    </section>
+
+    <!-- MÁS -->
+    <section id="mas" class="cv-section">
+      <div class="sec-head">
+        <h2>Certificaciones &amp; congresos</h2>
+      </div>
+      <div class="duo">
+        <div class="card pad" data-tags="mlia devops analitica">
+          <h3>Certificaciones</h3>
+          <ul class="listy">
+            <li><span class="yr">2025</span><span>Diplomado en Inteligencia Artificial Aplicada</span></li>
+            <li><span class="yr">2024</span><span>Google: IA y productividad</span></li>
+            <li><span class="yr">2024</span><span>Negociación</span></li>
+            <li><span class="yr">2022</span><span>Scrum Fundamentals Certified</span></li>
+            <li><span class="yr">2018</span><span>Diplomado en sistemas dinámicos</span></li>
+          </ul>
+        </div>
+        <div class="card pad" data-tags="investigacion">
+          <h3>Ponencias en congresos</h3>
+          <ul class="listy">
+            <li><span class="yr">2021</span><span>Competencia por el nicho acústico y estructura filogenética de comunidades de aves — XVIII Congreso para el Estudio y Conservación de las Aves en México</span></li>
+            <li><span class="yr">2018</span><span>Comunidad acústica de la ornitofauna en una zona semiárida (Reserva Tehuacán–Cuicatlán) — II Congreso Internacional de ANP</span></li>
+            <li><span class="yr">2017</span><span>Relación espacial del canto de <em>Toxostoma curvirostre</em> — XV Congreso para el Estudio y Conservación de las Aves en México</span></li>
+          </ul>
+        </div>
+        <div class="card pad" data-tags="investigacion analitica">
+          <h3>Talleres impartidos</h3>
+          <ul class="listy">
+            <li><span class="yr">2019</span><span>Análisis bioestadístico con R (enfoque biomédico), 60 h — Facultad de Medicina, BUAP</span></li>
+            <li><span class="yr">2018</span><span>Diplomado de estadística con R, Módulo III: análisis multivariado — Ciencias Biológicas, BUAP</span></li>
+          </ul>
+        </div>
+        <div class="card pad" data-tags="mlia analitica investigacion">
+          <h3>Educación continua (selección)</h3>
+          <ul class="listy">
+            <li><span class="yr">2025</span><span>Bootcamp Ecosistema Llama para desarrollo de IA — INFOTEC</span></li>
+            <li><span class="yr">2021</span><span>Geointeligencia computacional · Julia de alto rendimiento (IIMAS, UNAM)</span></li>
+            <li><span class="yr">2020</span><span>Modelado de nicho ecológico · Genómica de la conservación (INECOL)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="sec-head">
+        <h2>Contacto</h2>
+      </div>
+      <div class="duo">
+        <div class="card pad">
+          <h3>Directo</h3>
+          <div class="meta-row"><i class="bi bi-envelope"></i><a href="mailto:christianbiotitla@gmail.com">christianbiotitla@gmail.com</a></div>
+          <div class="meta-row"><i class="bi bi-whatsapp"></i><a href="https://wa.me/522221097767" target="_blank" rel="noopener">+52 222 109 7767</a></div>
+          <div class="meta-row"><i class="bi bi-geo-alt"></i><span>Huitzilac, Morelos, México</span></div>
+        </div>
+        <div class="card pad">
+          <h3>Enlaces</h3>
+          <div class="meta-row"><i class="bi bi-linkedin"></i><a href="https://www.linkedin.com/in/christian-daniel-mor%C3%A1n-titla-a99418130/" target="_blank" rel="noopener">LinkedIn</a></div>
+          <div class="meta-row"><i class="bi bi-github"></i><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></div>
+          <div class="meta-row"><i class="bi bi-git"></i><a href="https://gitlab.com/" target="_blank" rel="noopener">GitLab</a></div>
+          <div class="meta-row"><i class="bi bi-globe2"></i><a href="https://cocuidev.mx" target="_blank" rel="noopener">cocuidev.mx</a></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="fwrap">
+      <div>Christian Daniel Morán Titla — Científico de datos · Huitzilac, Morelos, México</div>
+      <div class="credit">
+        <img src="assets/cocuite-dev.png" alt="Cocui Dev" />
+        Cocui Dev · 2026
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  // animar medidores al entrar en viewport
+  (function(){
+    const meters=[...document.querySelectorAll('.meter i')];
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.width=(e.target.dataset.w||0)+'%';io.unobserve(e.target);}});},{threshold:.4});
+    meters.forEach(m=>io.observe(m));
+  })();
+
+  // resaltar enlace activo en la barra lateral
+  (function(){
+    const links=[...document.querySelectorAll('.side-nav a')];
+    const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=map.get(e.target.id);if(a)a.classList.add('active');}});},{rootMargin:'-25% 0px -65% 0px'});
+    document.querySelectorAll('main section').forEach(s=>io.observe(s));
+  })();
+
+  // cerrar el offcanvas al navegar (móvil)
+  (function(){
+    const el=document.getElementById('sidebar');
+    document.querySelectorAll('.side-nav a').forEach(a=>a.addEventListener('click',()=>{
+      const oc=bootstrap.Offcanvas.getInstance(el);
+      if(oc) oc.hide();
+    }));
+  })();
+
+  // FILTRO por área: solo permanece visible lo que pertenece al botón
+  (function(){
+    const btns=[...document.querySelectorAll('.fbtn')];
+    const items=[...document.querySelectorAll('[data-tags]')];
+    const sections=[...document.querySelectorAll('.cv-section')];
+    let active='todos';
+    const matches=(el)=>{const t=(el.dataset.tags||'').split(' ').filter(Boolean);return active==='todos'||t.includes(active);};
+    function apply(cat){
+      active=cat;
+      btns.forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
+      items.forEach(el=>el.classList.toggle('is-hidden', !matches(el)));
+      sections.forEach(sec=>{
+        const tagged=[...sec.querySelectorAll('[data-tags]')];
+        const any = active==='todos' || tagged.some(el=>(el.dataset.tags||'').split(' ').includes(active));
+        sec.classList.toggle('is-hidden', tagged.length>0 && !any);
+      });
+    }
+    btns.forEach(b=>b.addEventListener('click',()=>{const c=b.dataset.cat;apply(c!=='todos'&&c===active?'todos':c);}));
+  })();
+</script>
+</body>
+</html>
